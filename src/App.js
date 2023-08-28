@@ -2,20 +2,29 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 
 export default function App() {
-  const height = window.innerHeight;
-  const [hop, sethop] = useState(30);
+  const [count, setcount] = useState(10);
   const mystyle = {
-    marginTop: `${hop}px`,
+    marginTop: '40px',
+    width: '20px',
+    height: '20px',
+    backgroundColor: 'red',
+    marginLeft: `${count}px`,
   };
-  useEffect(() => {
-    sethop(hop + 85);
-  }, []);
+  function click() {
+    const interval = setInterval(() => {
+      setcount((count) => count + 1);
+    }, 16);
+
+    setTimeout(() => {
+      clearInterval(interval);
+    }, 5000);
+  }
   return (
     <div>
-      <button onClick={() => sethop(hop + 10)}>click me</button>
-      <h1 style={mystyle}>Me</h1>
-
-      <p>Start editing to see some magic happen :)</p>
+      <div style={mystyle}></div>
+      <button style={{ marginTop: '30px' }} onClick={click}>
+        click me
+      </button>
     </div>
   );
 }
